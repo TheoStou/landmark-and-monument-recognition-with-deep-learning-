@@ -18,10 +18,10 @@ In order to train the model 4708 images were gathered regarding the 18 different
 
 #### B. Data pre-processing
 
-##### Checking the quality
+- ##### Checking the quality
 it is vital to maintain only the images that satisfy a certain resolution. Images with a very low resolution are not useful for our purpose, as the information gained from them is minor and consequently the overall performance is decreasing.
 
-##### Renaming the images
+- ##### Renaming the images
 In order to avoid any errors regarding the name of the images, which often poses a great length and contain punctuation marks and spaces, we renamed each image providing a meaningful to us name.
 
 ##### Resizing the images
