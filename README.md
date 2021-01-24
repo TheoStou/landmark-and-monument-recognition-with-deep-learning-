@@ -29,6 +29,9 @@ The resize of the images constitutes a crucial action, especially in case we do 
 ![Example of the code utilized to resize the images on a specific path](https://user-images.githubusercontent.com/74372152/105639596-efafcc80-5e81-11eb-8275-5be392c61f79.png) </br>
 Example of the code utilized to resize the images on a specific path. </br> </br>
 
+##### Annotating the images
+A time-consuming but fundamental part of the pre-processing is the annotation of the images. To annotate the images, we use a tool named [LabelImg](https://tzutalin.github.io/labelImg/), available for several platforms, enabling us an easy draw of the desired bounding box along with the annotation for each box, as seen in the figure provided down below. LabelImg also offers us the opportunity for saving the annotation with either YOLO or PascalVOC format.
+
 
 ### 2. Google Colaboratory
 
