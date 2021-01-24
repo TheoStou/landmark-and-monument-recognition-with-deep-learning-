@@ -14,6 +14,7 @@ Probably the most time-consuming part of the experiment consisted of the data ga
 
 
 #### A. Data Gathering
+In order to train the model 4708 images regarding the 18 different UNESCO World Heritage Monuments, located in the city of Thessaloniki, were gathered. The data collection was created by manually downloaded images from the web, in combination with personal photographs taken for the respective monuments/landmarks. As lighting conditions and different angles of a monument are two factors that directly affect the coloring and possibly the shape of a monument, we try to maintain a variety in our images. With this strategy, it is ensured a greater chance for a correct and accurate prediction, even under various circumstances. 
 
 #### B. Data pre-processing
 
