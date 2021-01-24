@@ -25,8 +25,8 @@ it is vital to maintain only the images that satisfy a certain resolution. Image
 In order to avoid any errors regarding the name of the images, which often poses a great length and contain punctuation marks and spaces, we renamed each image providing a meaningful to us name.
 
 ##### Resizing the images
-The resize of the images constitutes a crucial action, especially in case we do not want to overwhelm the model. Furthermore, the reduced resolution will improve dramatically the pre-processing time. Both the SSD_MobileNet_V1_coco and the SSD_MobileNet_V2_coco demand a 300x300 pixels input resolution for the whole amount of images. The following figure demonstrates the method utilized to resize the images located in a specified path, keeping at the same time the original aspect ratio. </br>
-![Example of the code utilized to resize the images on a specific path](https://user-images.githubusercontent.com/74372152/105639596-efafcc80-5e81-11eb-8275-5be392c61f79.png)
+The resize of the images constitutes a crucial action, especially in case we do not want to overwhelm the model. Furthermore, the reduced resolution will improve dramatically the pre-processing time. Both the SSD_MobileNet_V1_coco and the SSD_MobileNet_V2_coco demand a 300x300 pixels input resolution for the whole amount of images. The following figure demonstrates the method utilized to resize the images located in a specified path, keeping at the same time the original aspect ratio. </br> </br>
+![Example of the code utilized to resize the images on a specific path](https://user-images.githubusercontent.com/74372152/105639596-efafcc80-5e81-11eb-8275-5be392c61f79.png) </br>
 Example of the code utilized to resize the images on a specific path. </br> </br>
 
 
