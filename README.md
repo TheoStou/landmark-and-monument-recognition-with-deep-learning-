@@ -136,6 +136,18 @@ print('Images in test dir:', len(os.listdir(testPath))/2)
 
 
 ### 2. Google Colaboratory
+[Google’s Colaboratory](https://colab.research.google.com/notebooks/intro.ipynb) python environment was selected to perform the experiment and [Google Drive](https://www.google.com/intl/en_jm/drive/) to host the necessary data and appropriate tools. </br>
+In short, Google Colaboratory [76] or commonly referred to as Google Colab is a research project, offering the potential for students, data scientists, or AI researchers to utilize powerful hardware just like GPUs and TPUs to implement and run their machine learning problems. In addition, Google Colab is based on an interactive Jupyter Notebook framework, equipped with various features [77]. Another main advantage of utilizing its environment is that it has the most frequent libraries for machine learning pre-installed not to mention the fact that also allows us to upload our files and mount our Google Drive.
 
+
+### 4.3	Setting up the environment
+To generate an accurate machine learning model, able to identify the provided monuments/landmarks we used the Tensorflow python library. Although at this time a newer version of Tensorflow has been released, Tensorflow 1.15 was chosen in our case, as it constitutes a more stable and robust solution regarding the newer one which presents some bugs and is still under development. On the official page of [Tensorflow on Github](https://github.com/tensorflow/models/tree/master/research), we can find all the necessary files to train a model. In order to access these files, we opted to clone the Tensorflow Github’s repository to our Google Drive account. To achieve this operation, we first mounted a Google Drive account to Google Colab with the following command:
+```ruby
+from google.colab import drive
+drive.mount('/content/gdrive')
+```
+and by allowing access inserting the required authorization code. </br> </br>
+![Copy-pasting the provided code, will allow access to our Google Drive repository](https://user-images.githubusercontent.com/74372152/105702930-2daa0080-5f15-11eb-981e-d216dcdc58b7.png) </br>
+Copy-pasting the provided code, will allow access to our Google Drive repository. </br>
 
 
