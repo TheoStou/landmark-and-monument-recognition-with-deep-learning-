@@ -140,7 +140,7 @@ print('Images in test dir:', len(os.listdir(testPath))/2)
 In short, Google Colaboratory [76] or commonly referred to as Google Colab is a research project, offering the potential for students, data scientists, or AI researchers to utilize powerful hardware just like GPUs and TPUs to implement and run their machine learning problems. In addition, Google Colab is based on an interactive Jupyter Notebook framework, equipped with various features [77]. Another main advantage of utilizing its environment is that it has the most frequent libraries for machine learning pre-installed not to mention the fact that also allows us to upload our files and mount our Google Drive.
 
 
-### 3	Setting up the environment
+### 3. Setting up the environment
 To generate an accurate machine learning model, able to identify the provided monuments/landmarks we used the Tensorflow python library. Although at this time a newer version of Tensorflow has been released, Tensorflow 1.15 was chosen in our case, as it constitutes a more stable and robust solution regarding the newer one which presents some bugs and is still under development. On the official page of [Tensorflow on Github](https://github.com/tensorflow/models/tree/master/research), we can find all the necessary files to train a model. In order to access these files, we opted to clone the Tensorflow Github’s repository to our Google Drive account. To achieve this operation, we first mounted a Google Drive account to Google Colab with the following command:
 ```ruby
 from google.colab import drive
@@ -265,7 +265,7 @@ item {
 ```
 
 
-### 6 Download a pre-trained model and alter the configuration file
+### 6. Download a pre-trained model and alter the configuration file
 Considering that training a complete convolutional neural network from scratch requires significant amounts of time, storing capacity, and computational power, using a pre-trained model is strongly suggested. The idea behind the concept is transfer learning, as referred to at 3.8 and it is being actualized with the [Tensorflow Object Detection API](https://github.com/tensorflow/models/tree/master/research/object_detection). From the [Model Zoo repository](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_detection_zoo.md), we can observe various pre-trained models along with their speed and mAP performance pre-trained and tested on the [COCO dataset](https://cocodataset.org/#home). To conduct our experiment, the “SSD_MobilNet_V1_coco” and the “SSD_MobileNet_V2_coco” models were selected, in view of the fact that both present pleasant performance and great speed, particularly important for mobile devices. </br> </br>
 The last step before running our custom object detection model is to download and import the appropriate configuration file for this pre-trained model. As the name suggests, the configuration file defines the exact way of the training process and allows us to modify the desired parameters. The required changes we applied are summarized down below: 
 - The “num_classes” are defined as equal to 18.
@@ -274,14 +274,47 @@ The last step before running our custom object detection model is to download an
 - The “input_path” and the “label_map_path” for both “train_input_reader” and “eval_input_reader” are linked with the “train.record”, the “test.record” and the “label_map.pbtxt” files.
 
 
+### 7. Training the model
+It is highly recommended, before start training the model to alter the runtime type to GPU, as Google Colab offering the opportunity to utilize its GPU, which without any doubt can provide significantly faster results. For the training process, the “model_main.py” script from the “object_detection” folder is used, along with several necessary arguments as demonstrated in the following block of code.
+```ruby
+!python /content/gdrive/My\ Drive/models/research/object_detection/model_main.py \
+    --pipeline_config_path={pipeline_file} \
+    --model_dir={model_dir} \
+    --alsologtostderr \
+    --num_train_steps={num_steps} \
+    --num_eval_steps={num_eval_steps}
+```
+More specifically, the following prerequisites are provided:
+- The path of the “pipeline_file”, which is identical to the configuration file created at the previous step.
+- The “model_dir”, which is the path to the output directory, is needed to store the final checkpoint files.  
+- The “num_steps”, which entails the total number of iterations that the experiment will be conducted.
+- The “num_eval_steps”, which defines the number of steps before applying an evaluation. 
 
 
+### 8. Measuring and evaluating the model with Tensorboard
+This is an optional action and it does not affect the remaining procedure, however, usually, it is practical and essential to evaluate the model’s performance, so as to have a clearer view. Tensorboard is a tool designed to provide various measurements and visualizations, regarding the trained model, just like the loss and the accuracy values. </br> 
+**Loading Tensorboard by providing the training directory of the model.**
+```ruby
+%load_ext tensorboard
+%tensorboard --logdir /content/gdrive/My\ Drive/models/research/object_detection/training
+```
+Regularly, these metrics are based on the “metric_set” chosen in the configuration file and each selection may offer us a different kind of evaluation. </br> </br>
+![Example of the Tensorboard interface](https://user-images.githubusercontent.com/74372152/105705839-6ba92380-5f19-11eb-88c5-27e7258a8a20.png) </br>
+Example of the Tensorboard interface.
 
 
+### 9. Exporting the graph from the trained model
+In this step, the “export_tflite_ssd_graph.py” script is used to generate a frozen graph from the created checkpoint files. It constitutes a fundamental procedure as transforms the produced files from the training section into a usable format for testing and deploying our model in Android. A common approach concerning the selection of the appropriate step checkpoint is to take the latest one, as it has covered the most steps. Nonetheless, this may not be the case for any occasion and for this reason, it is recommended to first consult an evaluation metric. If the process of exporting the graph is properly conducted, then two new files will be created at the specified directory, a **“tflite_graph.pb”** and a **“tflite_graph.pbtxt”**.
+```ruby
+!python /content/gdrive/My\ Drive/models/research/object_detection/export_tflite_ssd_graph.py \
+  --pipeline_config_path /content/gdrive/My\ Drive/models/research/deploy3/pipeline_file.config \
+  --trained_checkpoint_prefix /content/gdrive/My\ Drive/models/research/object_detection/training3/model.ckpt-193043 \
+  --output_directory /content/gdrive/My\ Drive/models/research/object_detection/exported_model3 \
+  --add_postprocessing_op True
+```
 
 
-
-
+### 10. Getting the model’s lite version with TFLite
 
 
 
