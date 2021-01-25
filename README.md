@@ -359,7 +359,7 @@ Example of the user’s application environment. The picture displays a correct 
 
 
 ## Results
-mAP performance for SSD MobileNet V1
+**mAP performance for SSD MobileNet V1**
 | **Step** | **mAP** | **mAP_0.50_IoU** | **AP_0.75_IoU** |
 | :--- | :--- | :--- | :--- |
 | **1.622** | 1.189E-02% | 9.358E-02% | 3.67E-06% |
@@ -368,7 +368,50 @@ mAP performance for SSD MobileNet V1
 | **89725** | 67.36% | 93.35% | 78.30% |
 | **126067** | 70.29% | 94.64% | 81.83% |
 | **163119** | 67.87% |93.32% | 77.60% |
-| **199986** | 71.90% | 95.05% | 82.94% |
+| **199986** | **71.90%** | **95.05%** | **82.94%** |
+
+**mAP performance for SSD MobileNet V2**
+| **Step** | **mAP** | **mAP_0.50_IoU** | **AP_0.75_IoU** |
+| :--- | :--- | :--- | :--- |
+| **1712** | 3.950E-02% | 3.178E-01% | 1.04E-04% |
+| **31621** | 60.73% | 88.73% | 69.71% |
+| **65954** | 68.63% | 93.96% | 80.84%|
+| **102733** | 72.00% | 95.63% | 83.48% |
+| **137659** | 72.70% | **96.20%** | 83.73% |
+| **165487** | **73.59%** | 95.73% | 84.50% |
+| **197470** | 73.32% | 95.03% | **85.03%** |
+
+</br> </br>
+![The mAP ( 50 IOU) of the ssd_mobilenet_v1 model](https://user-images.githubusercontent.com/74372152/105741312-d0c53f00-5f42-11eb-90f9-f9a1515da745.png) </br>
+mAP (.50 IoU) of the SSD MobileNet V1 </br> </br>
+
+![The mAP ( 50 IOU) of the ssd_mobilenet_v1 model](https://user-images.githubusercontent.com/74372152/105741421-f05c6780-5f42-11eb-8942-31174a71ba49.png) </br>
+mAP (.50 IoU) of the SSD MobileNet V2 </br> </br>
+
+In order to acquire a more rounded overview of the model’s performance, each of these two graphs was tested independently on 844 images from all the 18 monuments and assessed in terms of TP, FP, FN, Precision, Recall, F1-Score, and Accuracy. The aforementioned metrics are presented for both nodels down below. </br> </br>
+
+![Table of the evaluation results for ssd mobilenet v1 model](https://user-images.githubusercontent.com/74372152/105741822-6bbe1900-5f43-11eb-9043-f8755052f3d2.png) </br>
+Table of the evaluation results for SSD MobileNet V1 model. </br> </br>
+
+![Table of the evaluation results for ssd mobilenet v2 model](https://user-images.githubusercontent.com/74372152/105742255-eedf6f00-5f43-11eb-88fa-410744750b4e.png)
+Table of the evaluation results for SSD MobileNet V2 model. </br> </br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
