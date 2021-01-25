@@ -9,6 +9,7 @@ In this project, we provided an approach to constructing and implementing a Monu
 
 ## Approach
 
+
 ### 1. Preparing the dataset
 Probably the most time-consuming part of the experiment consisted of the data gathering and the pre-processing. An essential and inextricable task for every training model in machine learning is the collection of the required dataset (collection of data).
 
@@ -16,16 +17,20 @@ Probably the most time-consuming part of the experiment consisted of the data ga
 #### A. Data Gathering
 In order to train the model 4708 images were gathered regarding the 18 different UNESCO World Heritage Monuments, located in the city of Thessaloniki. The data collection was created by manually downloaded images from the web, in combination with personal photographs taken for the respective monuments/landmarks. As lighting conditions and different angles of a monument are two factors that directly affect the coloring and possibly the shape of a monument, we try to maintain a variety in our images. With this strategy, it is ensured a greater chance for a correct and accurate prediction, even under various circumstances. 
 
+
 #### B. Data pre-processing
+
 
 - ##### Checking the quality
 it is vital to maintain only the images that satisfy a certain resolution. Images with a very low resolution are not useful for our purpose, as the information gained from them is minor and consequently the overall performance is decreasing.
 
+
 - ##### Renaming the images
 In order to avoid any errors regarding the name of the images, which often poses a great length and contain punctuation marks and spaces, we renamed each image providing a meaningful to us name.
 
+
 - ##### Resizing the images
-The resize of the images constitutes a crucial action, especially in case we do not want to overwhelm the model. Furthermore, the reduced resolution will improve dramatically the pre-processing time. Both the SSD_MobileNet_V1_coco and the SSD_MobileNet_V2_coco demand a 300x300 pixels input resolution for the whole amount of images. The following figure demonstrates the method utilized to resize the images located in a specified path, keeping at the same time the original aspect ratio. </br> </br>
+The resize of the images constitutes a crucial action, especially in case we do not want to overwhelm the model. Furthermore, the reduced resolution will improve dramatically the pre-processing time. Both the SSD_MobileNet_V1_coco and the SSD_MobileNet_V2_coco demand a 300x300 pixels input resolution for the whole amount of images. The following figure demonstrates the method utilized to resize the images located in a specified path, keeping at the same time the original aspect ratio. </br>
 ```ruby
 from PIL import Image
 import os, sys
@@ -52,7 +57,82 @@ def resize_an_image_keeping_aspect_ratio():
 ```
 
 - ##### Annotating the images
-A time-consuming but fundamental part of the pre-processing is the annotation of the images. To annotate the images, we use a tool named [LabelImg](https://tzutalin.github.io/labelImg/), available for several platforms, enabling us an easy draw of the desired bounding box along with the annotation for each box, as seen in the figure provided down below. LabelImg also offers us the opportunity for saving the annotation with either YOLO or PascalVOC format.
+A time-consuming but fundamental part of the pre-processing is the annotation of the images. To annotate the images, we use a tool named [LabelImg](https://tzutalin.github.io/labelImg/), available for several platforms, enabling us an easy draw of the desired bounding box along with the annotation for each box, as seen in the figure provided down below. LabelImg also offers us the opportunity for saving the annotation with either YOLO or PascalVOC format. After the confirmation for the bounding box and the annotation, the program automatically generates a (XML) file with the same name as the image. For each image, we can observe that the (XML) file, besides the filename and the size of the image also contains the label name in association with the coordinates of the drawn bounding box/boxes. </br> </br>
+![Example of the Labelimg environment  Creating a bounding box and provide an annotation for it](https://user-images.githubusercontent.com/74372152/105701383-e589de80-5f12-11eb-8766-a8e1acd854fe.png) </br>
+Example of the Labelimg environment. Creating a bounding box and provide an annotation for it. </br>
+
+
+##### Splitting the dataset into train and test set
+Before proceeding with the next step, we separate our images and their matching annotation files into a training and a testing set, using an 80-20 ratio. The separation is implemented randomly to help ensure homogeneity, allocating the data into two distinct folders, one created for the train and the other for the test set.
+```ruby
+import os
+from random import choice
+import shutil
+
+#arrays to store file names
+imgs =[]
+xmls =[]
+
+#setup dir names
+trainPath = 'C:/Users/Jarvis/Desktop/Dataset/18. Rotunda/train'
+testPath = 'C:/Users/Jarvis/Desktop/Dataset/18. Rotunda/test'
+crsPath = 'C:/Users/Jarvis/Desktop/Dataset/18. Rotunda/' #dir where images and annotations stored
+
+#setup ratio
+train_ratio = 0.8
+test_ratio = 0.2
+
+#total count of imgs
+totalImgCount = len(os.listdir(crsPath))/2
+
+#soring files to corresponding arrays
+for (dirname, dirs, files) in os.walk(crsPath):
+    for filename in files:
+        if filename.endswith('.xml'):
+            xmls.append(filename)
+        else:
+            imgs.append(filename)
+
+
+#counting range for cycles
+countForTrain = int(len(imgs)*train_ratio)
+countForTest = int(len(imgs)*test_ratio)
+
+#cycle for train dir
+for x in range(countForTrain):
+
+    fileJpg = choice(imgs) # get name of random image from origin dir
+    fileXml = fileJpg[:-4] +'.xml' # get name of corresponding annotation file
+
+    #move both files into train dir
+    shutil.move(os.path.join(crsPath, fileJpg), os.path.join(trainPath, fileJpg))
+    shutil.move(os.path.join(crsPath, fileXml), os.path.join(trainPath, fileXml))
+
+    #remove files from arrays
+    imgs.remove(fileJpg)
+    xmls.remove(fileXml)
+
+
+
+#cycle for test dir   
+for x in range(countForTest):
+
+    fileJpg = choice(imgs) # get name of random image from origin dir
+    fileXml = fileJpg[:-4] +'.xml' # get name of corresponding annotation file
+
+    #move both files into train dir
+    shutil.move(os.path.join(crsPath, fileJpg), os.path.join(testPath, fileJpg))
+    shutil.move(os.path.join(crsPath, fileXml), os.path.join(testPath, fileXml))
+
+    #remove files from arrays
+    imgs.remove(fileJpg)
+    xmls.remove(fileXml)
+
+#summary information after splitting
+print('Total images: ', totalImgCount)
+print('Images in train dir:', len(os.listdir(trainPath))/2)
+print('Images in test dir:', len(os.listdir(testPath))/2)
+```
 
 
 ### 2. Google Colaboratory
