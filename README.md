@@ -315,6 +315,36 @@ In this step, the “export_tflite_ssd_graph.py” script is used to generate a 
 
 
 ### 10. Getting the model’s lite version with TFLite
+In order to deploy our model in the Android platform, it is necessary first to convert the created “tflite_graph.pb” file into a Tensorflow Lite format. Using a special format for manipulating models, Tensorflow Lite offers efficient execution for mobile and other embedded devices, utilizing limited computational power. To perform the conversion, the [Tensorflow Lite converter tool](https://www.tensorflow.org/lite/guide/get_started) was used. There are two options for conversion, either to generate a Non-quantized model or a quantized one. The former of the two presents slightly better results and requires more storing space, although the latter of the two provides slightly worst results requiring fewer storing space. After the correct execution, a (TFLITE) file is created. </br> </br>
+**Converting the model to Tensorflow Lite format, using the non-quantized method.**
+```ruby
+import tensorflow as tf
+
+graph_def_file = "object_detection/exported_model3/tflite_graph.pb"
+input_arrays = ["normalized_input_image_tensor"]
+output_arrays = [
+        'TFLite_Detection_PostProcess', 'TFLite_Detection_PostProcess:1',
+        'TFLite_Detection_PostProcess:2', 'TFLite_Detection_PostProcess:3' ]
+
+converter = tf.lite.TFLiteConverter.from_frozen_graph( 
+    graph_def_file, 
+    input_arrays, 
+    output_arrays, 
+    input_shapes={'normalized_input_image_tensor':[1, 300, 300, 3]} )
+
+converter.allow_custom_ops = True
+tflite_model = converter.convert()
+open("object_detection/exported_model3/detect.tflite", "wb").write(tflite_model)
+```
+
+
+### 11. Adding a metadata file to the transformed model
+The final step before the implementation of the model into Android is the creation of a metadata file. Alternatively, a file that provides knowledge about the model which is comprised of both human and machine-readable segments. This file is divided into three subcategories, model, input, and output information. After executing the appropriate commands, the metadata file is attached to the defined model. Optionally, with the MetadataDisplayer tool, we have the potential to visualize the results, writing the metadata file into a (JSON) file. 
+
+
+### 12. Deploying the model to Android
+
+
 
 
 
