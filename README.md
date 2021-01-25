@@ -140,7 +140,7 @@ print('Images in test dir:', len(os.listdir(testPath))/2)
 In short, Google Colaboratory [76] or commonly referred to as Google Colab is a research project, offering the potential for students, data scientists, or AI researchers to utilize powerful hardware just like GPUs and TPUs to implement and run their machine learning problems. In addition, Google Colab is based on an interactive Jupyter Notebook framework, equipped with various features [77]. Another main advantage of utilizing its environment is that it has the most frequent libraries for machine learning pre-installed not to mention the fact that also allows us to upload our files and mount our Google Drive.
 
 
-### 4.3	Setting up the environment
+### 3	Setting up the environment
 To generate an accurate machine learning model, able to identify the provided monuments/landmarks we used the Tensorflow python library. Although at this time a newer version of Tensorflow has been released, Tensorflow 1.15 was chosen in our case, as it constitutes a more stable and robust solution regarding the newer one which presents some bugs and is still under development. On the official page of [Tensorflow on Github](https://github.com/tensorflow/models/tree/master/research), we can find all the necessary files to train a model. In order to access these files, we opted to clone the Tensorflow Github’s repository to our Google Drive account. To achieve this operation, we first mounted a Google Drive account to Google Colab with the following command:
 ```ruby
 from google.colab import drive
@@ -148,7 +148,7 @@ drive.mount('/content/gdrive')
 ```
 and by allowing access inserting the required authorization code. </br> </br>
 ![Copy-pasting the provided code, will allow access to our Google Drive repository](https://user-images.githubusercontent.com/74372152/105702930-2daa0080-5f15-11eb-981e-d216dcdc58b7.png) </br>
-Copy-pasting the provided code, will allow access to our Google Drive repository. </br>
+Copy-pasting the provided code, will allow access to our Google Drive repository. </br> </br>
 Now that we have granted access to our account, with the following piece of code:
 ```ruby
 import os
@@ -170,7 +170,73 @@ For the implementation of the project, we also constructed the proper working di
 - An “exported_model” folder, to save the exported model.
 
 
+### 4. Converting xml files to tfrecord
+Another necessary operation is the conversion of the aforementioned (XML) files, which contain the total amount of the annotations, into (TFRECORD) files. Tfrecord is a type of data supported by Tensorflow and is highly recommended, as it offers an effective way of sustaining a scalable architecture and a common input format. The described process occurred in two sequential steps. We first transformed the (XML) files into (CSV) files following by the transformation of the (CSV) files into (TFRECORD) files. </br>
+**Convert XML to CSV.**
+```ruby
+def xml_to_csv(path):
+    xml_list = []
+    for xml_file in glob.glob(path + '/*.xml'):
+        tree = ET.parse(xml_file)
+        root = tree.getroot()
+        for member in root.findall('object'):
+            value = (root.find('filename').text,
+                     int(root.find('size')[0].text),
+                     int(root.find('size')[1].text),
+                     member[0].text,
+                     int(member[4][0].text),
+                     int(member[4][1].text),
+                     int(member[4][2].text),
+                     int(member[4][3].text)
+                     )
+            xml_list.append(value)
+    column_name = ['filename', 'width', 'height',
+                   'class', 'xmin', 'ymin', 'xmax', 'ymax']
+    xml_df = pd.DataFrame(xml_list, columns=column_name)
+    return xml_df
+```
+**Convert CSV to TFRECORD.**
+```ruby
+def create_tf_example(group, path):
+    with tf.gfile.GFile(os.path.join(path, '{}'.format(group.filename)), 'rb') as fid:
+        encoded_jpg = fid.read()
+    encoded_jpg_io = io.BytesIO(encoded_jpg)
+    image = Image.open(encoded_jpg_io)
+    width, height = image.size
 
+    filename = group.filename.encode('utf8')
+    image_format = b'jpg'
+    xmins = []
+    xmaxs = []
+    ymins = []
+    ymaxs = []
+    classes_text = []
+    classes = []
+
+    for index, row in group.object.iterrows():
+        xmins.append(row['xmin'] / width)
+        xmaxs.append(row['xmax'] / width)
+        ymins.append(row['ymin'] / height)
+        ymaxs.append(row['ymax'] / height)
+        classes_text.append(row['class'].encode('utf8'))
+        classes.append(class_text_to_int(row['class']))
+
+    tf_example = tf.train.Example(features=tf.train.Features(feature={
+        'image/height': dataset_util.int64_feature(height),
+        'image/width': dataset_util.int64_feature(width),
+        'image/filename': dataset_util.bytes_feature(filename),
+        'image/source_id': dataset_util.bytes_feature(filename),
+        'image/encoded': dataset_util.bytes_feature(encoded_jpg),
+        'image/format': dataset_util.bytes_feature(image_format),
+        'image/object/bbox/xmin': dataset_util.float_list_feature(xmins),
+        'image/object/bbox/xmax': dataset_util.float_list_feature(xmaxs),
+        'image/object/bbox/ymin': dataset_util.float_list_feature(ymins),
+        'image/object/bbox/ymax': dataset_util.float_list_feature(ymaxs),
+        'image/object/class/text': dataset_util.bytes_list_feature(classes_text),
+        'image/object/class/label': dataset_util.int64_list_feature(classes),
+    }))
+    return tf_example
+```
 
 
 
