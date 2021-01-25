@@ -26,8 +26,30 @@ In order to avoid any errors regarding the name of the images, which often poses
 
 - ##### Resizing the images
 The resize of the images constitutes a crucial action, especially in case we do not want to overwhelm the model. Furthermore, the reduced resolution will improve dramatically the pre-processing time. Both the SSD_MobileNet_V1_coco and the SSD_MobileNet_V2_coco demand a 300x300 pixels input resolution for the whole amount of images. The following figure demonstrates the method utilized to resize the images located in a specified path, keeping at the same time the original aspect ratio. </br> </br>
-![Example of the code utilized to resize the images on a specific path](https://user-images.githubusercontent.com/74372152/105639596-efafcc80-5e81-11eb-8275-5be392c61f79.png) </br>
-Example of the code utilized to resize the images on a specific path. </br> </br>
+```ruby
+from PIL import Image
+import os, sys
+
+path = "C:/data/images/"
+dirs = os.listdir(path)
+final_size = 300;
+
+def resize_an_image_keeping_aspect_ratio():
+    
+    for item in dirs:
+         if item == '.DS_Store':
+             continue
+         if os.path.isfile(path+item):
+             im = Image.open(path+item)
+             f, e = os.path.splitext(path+item)
+             size = im.size
+             ratio = float(final_size) / max(size)
+             new_image_size = tuple([int(x*ratio) for x in size])
+             im = im.resize(new_image_size, Image.ANTIALIAS)
+             new_im = Image.new("RGB", (final_size, final_size))
+             new_im.paste(im, ((final_size-new_image_size[0])//2, (final_size-new_image_size[1])//2))
+             new_im.save(f + '.jpg', 'JPEG', quality=90)
+```
 
 - ##### Annotating the images
 A time-consuming but fundamental part of the pre-processing is the annotation of the images. To annotate the images, we use a tool named [LabelImg](https://tzutalin.github.io/labelImg/), available for several platforms, enabling us an easy draw of the desired bounding box along with the annotation for each box, as seen in the figure provided down below. LabelImg also offers us the opportunity for saving the annotation with either YOLO or PascalVOC format.
