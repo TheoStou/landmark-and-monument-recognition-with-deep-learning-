@@ -163,11 +163,11 @@ elif not pathlib.Path('models').exists():
 ```
 we can clone the specified repository. By changing the working directory, we can start installing the appropriate dependencies that are essential for the experiment. </br>
 For the implementation of the project, we also constructed the proper working directory. More specifically, we created:
-o	A “deploy” folder, which contains the pre-trained model, the “labelmap.pbtxt” and the “pipeline_file.config”, which are being covered in the next subsections.
-o	An “images” folder, which includes the images and the annotations (.xml) files for both the train and the evaluation phase. 
-o	A “data” folder, required to save some additional files regarding the training process.
-o	An empty “training” folder, to store the checkpoint files of the training procedure.
-o	An “exported_model” folder, to save the exported model.
+- A “deploy” folder, which contains the pre-trained model, the “labelmap.pbtxt” and the “pipeline_file.config”, which are being covered in the next subsections.
+- An “images” folder, which includes the images and the annotations (.xml) files for both the train and the evaluation phase. 
+- A “data” folder, required to save some additional files regarding the training process.
+- An empty “training” folder, to store the checkpoint files of the training procedure.
+- An “exported_model” folder, to save the exported model.
 
 
 
