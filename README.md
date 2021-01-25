@@ -343,12 +343,22 @@ The final step before the implementation of the model into Android is the creati
 
 
 ### 12. Deploying the model to Android
+In this section, [Android Studio 4.1](https://developer.android.com/studio?authuser=1) is used to create and build an application based on our already trained custom model and regarding the aforementioned monuments/landmarks. Briefly, Android Studio grants an integrated development environment for the Android platform, especially constructed for Android development. In order to deploy our custom model, the following procedure was applied: </br>
+- Tensorflow’s Lite object detection sample repository was cloned into our local repository.
+- Initializing the Android Studio application, “Open an existing Android Studio project” was selected. Subsequently, navigating through our repository, the cloned Android directory is chosen. 
+- If requested, we confirm to apply Gradle Sync and we proceed with the installation of various platforms and tools.
+- At this point, we search for the asset folder, located in the “Android/app/src/main” directory and we need to change these files with our personal files. These are consist of the “ssd_mobilenet_v2.tflite” which is our trained model and the “labelmap.txt” which contains the labels of our trained classes.
+- Several alterations should also be applied at the “DetectorActivity.java” file, so as to deploy our custom model. We change the “TF_OD_API_MODEL_FILE” into our model’s name. The same procedure is followed for the “TF_OD_API_LABELS_FILE” variable, providing the name of our label map file. Additionally, we modify the “TF_OD_API_IS_QUANTIZED” value to “false”, considering that our model is a Non-quantized one. (Figure 35) provides an illustrative example of the “DetectorActivity.java” after the above implementations.
+- At the “build.gradle” file, we also select the appropriate “complileSdVersion” and the desired “targetSdkVersion” and we deactivate the auto-download of the model.
+- Finally, by connecting our Android device to our personal computer, with the developer mode enabled and by selecting “Make a project” our application is ready for use. Alternatively, the Android Studio environment allows us to create a virtual device offering the opportunity for various tests, possibly at different Android versions. </br> </br>
+The following figures represent an example of the produced application, as well as the user’s environment and the first predictions conducted toward the monuments/landmarks. </br> </br>
+![Example of the created application, “TFL Detect”](https://user-images.githubusercontent.com/74372152/105738629-e84ef880-5f3f-11eb-8e6d-c7b7888fc07e.png) </br>
+Example of the created application, “TFL Detect”. </br> </br>
+![Example of the user’s application environment  The picture displays a correct identification of the Church of Saint Sophia in the area of Thessaloniki, along with a bounding box and a confidence score](https://user-images.githubusercontent.com/74372152/105738753-0b79a800-5f40-11eb-8277-f63aef361e0d.png) </br>
+Example of the user’s application environment. The picture displays a correct identification of the Church of Saint Sophia in the area of Thessaloniki, along with a bounding box and a confidence score. </br> </br>
 
 
-
-
-
-
+## Results
 
 
 
