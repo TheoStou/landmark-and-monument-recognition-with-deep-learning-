@@ -171,7 +171,7 @@ For the implementation of the project, we also constructed the proper working di
 
 
 ### 4. Converting xml files to tfrecord
-Another necessary operation is the conversion of the aforementioned (XML) files, which contain the total amount of the annotations, into (TFRECORD) files. Tfrecord is a type of data supported by Tensorflow and is highly recommended, as it offers an effective way of sustaining a scalable architecture and a common input format. The described process occurred in two sequential steps. We first transformed the (XML) files into (CSV) files following by the transformation of the (CSV) files into (TFRECORD) files. </br>
+Another necessary operation is the conversion of the aforementioned (XML) files, which contain the total amount of the annotations, into (TFRECORD) files. Tfrecord is a type of data supported by Tensorflow and is highly recommended, as it offers an effective way of sustaining a scalable architecture and a common input format. The described process occurred in two sequential steps. We first transformed the (XML) files into (CSV) files following by the transformation of the (CSV) files into (TFRECORD) files. </br> </br>
 **Convert XML to CSV.**
 ```ruby
 def xml_to_csv(path):
@@ -238,6 +238,40 @@ def create_tf_example(group, path):
     return tf_example
 ```
 
+
+### 5. Creating a label map
+As a trained model can only identify an integer value, it is essential to create a label map file. Alternatively stated, we have to map each of our class labels into an integer number. Since our project includes 18 monuments/landmarks, the process should be applied to all 18 classes. Starting with the integer “1”, a sample of the generated label map is provided in the following command and is saved with a (PBTXT) format. 
+```ruby
+item {
+  name: "Aghios Demetrius"
+  id: 1
+}
+item {
+  name: "Saint Apostoles"
+  id: 2
+}
+item {
+  name: "Saint Sophia"
+  id: 3
+}
+item {
+  name: "Acheiropoietos"
+  id: 4
+}
+item {
+  name: "Saint Aikaterini"
+  id: 5
+...
+```
+
+
+### 6 Download a pre-trained model and alter the configuration file
+Considering that training a complete convolutional neural network from scratch requires significant amounts of time, storing capacity, and computational power, using a pre-trained model is strongly suggested. The idea behind the concept is transfer learning, as referred to at 3.8 and it is being actualized with the [Tensorflow Object Detection API](https://github.com/tensorflow/models/tree/master/research/object_detection). From the [Model Zoo repository](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_detection_zoo.md), we can observe various pre-trained models along with their speed and mAP performance pre-trained and tested on the [COCO dataset](https://cocodataset.org/#home). To conduct our experiment, the “SSD_MobilNet_V1_coco” and the “SSD_MobileNet_V2_coco” models were selected, in view of the fact that both present pleasant performance and great speed, particularly important for mobile devices. </br> </br>
+The last step before running our custom object detection model is to download and import the appropriate configuration file for this pre-trained model. As the name suggests, the configuration file defines the exact way of the training process and allows us to modify the desired parameters. The required changes we applied are summarized down below: 
+- The “num_classes” are defined as equal to 18.
+- A “batch_size” of 24 is used.
+- The “fine_tune_checkpoint” was set each time regarding the model’s checkpoints name.
+- The “input_path” and the “label_map_path” for both “train_input_reader” and “eval_input_reader” are linked with the “train.record”, the “test.record” and the “label_map.pbtxt” files.
 
 
 
