@@ -393,7 +393,7 @@ In order to acquire a more rounded overview of the model’s performance, each o
 ![Table_1](https://user-images.githubusercontent.com/74372152/105742846-ac6a6200-5f44-11eb-8926-61008252994b.png) </br>
 Table of the evaluation results for SSD MobileNet V1 model. </br> </br>
 
-![Table_2](https://user-images.githubusercontent.com/74372152/105742925-c3a94f80-5f44-11eb-9cb5-8d388d48eb2c.png)
+![Table_2](https://user-images.githubusercontent.com/74372152/105744280-8c876e00-5f45-11eb-8a44-b43955023fb4.png) </br>
 Table of the evaluation results for SSD MobileNet V2 model. </br> </br>
 
 
