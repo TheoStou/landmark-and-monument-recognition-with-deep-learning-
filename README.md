@@ -390,10 +390,10 @@ mAP (.50 IoU) of the SSD MobileNet V2 </br> </br>
 
 In order to acquire a more rounded overview of the model’s performance, each of these two graphs was tested independently on 844 images from all the 18 monuments and assessed in terms of TP, FP, FN, Precision, Recall, F1-Score, and Accuracy. The aforementioned metrics are presented for both nodels down below. </br> </br>
 
-![Table of the evaluation results for ssd mobilenet v1 model](https://user-images.githubusercontent.com/74372152/105741822-6bbe1900-5f43-11eb-9043-f8755052f3d2.png) </br>
+![Table_1](https://user-images.githubusercontent.com/74372152/105742846-ac6a6200-5f44-11eb-8926-61008252994b.png) </br>
 Table of the evaluation results for SSD MobileNet V1 model. </br> </br>
 
-![Table of the evaluation results for ssd mobilenet v2 model](https://user-images.githubusercontent.com/74372152/105742255-eedf6f00-5f43-11eb-88fa-410744750b4e.png)
+![Table_2](https://user-images.githubusercontent.com/74372152/105742925-c3a94f80-5f44-11eb-9cb5-8d388d48eb2c.png)
 Table of the evaluation results for SSD MobileNet V2 model. </br> </br>
 
 
