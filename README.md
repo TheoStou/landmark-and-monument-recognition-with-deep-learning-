@@ -17,7 +17,7 @@ In this project, we provided an approach to constructing and implementing a Monu
     * [7. Training the model](#7-training-the-model)
     * [8. Measuring and evaluating the model with Tensorboard](#8-measuring-and-evaluating-the-model-with-Tensorboard)
     * [9. Exporting the graph from the trained model](#9-exporting-the-graph-from-the-trained-model)
-    * [10. Getting the model’s lite version with TFLite](#10-getting-the-model’s-lite-version-with-tFLite)
+    * [10. Getting the model’s lite version with TFLite](#10-getting-the-model-s-lite-version-with-tFLite)
     * [11. Adding a metadata file to the transformed model](#11-adding-a-metadata-file-to-the-transformed-model)
     * [12. Deploying the model to Android](#12-deploying-the-model-to-android)
 * [Results](#results)
