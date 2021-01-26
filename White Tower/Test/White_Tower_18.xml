@@ -1,0 +1,26 @@
+<annotation>
+	<folder>train</folder>
+	<filename>White_Tower_18.jpg</filename>
+	<path>E:\Resized_Dataset\13. White Tower\train\White_Tower_18.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>300</width>
+		<height>300</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>White Tower</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>91</xmin>
+			<ymin>97</ymin>
+			<xmax>204</xmax>
+			<ymax>255</ymax>
+		</bndbox>
+	</object>
+</annotation>
