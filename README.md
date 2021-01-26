@@ -420,8 +420,16 @@ Example of the data augmentation technique applied. The church of Panayia Chalke
 | **182708** | 71.14% | 95.56% | 82.41% |
 | **196640** | **73.19%** | **96.37%** | **83.37%** |
 
+![Table_3](https://user-images.githubusercontent.com/74372152/105870697-2f50f280-6001-11eb-9155-5cfe6c4e4d47.png) </br>
+Table of the evaluation results for SSD MobileNet V2 with data augmentation technique. </br> </br>
 
 
+## Future Work
+To further enrich the effort presented in this project, collecting additional images under various circumstances and from diverse angles of view, particularly for those with lower metrics, would definitely benefit the performance of the models. Combining this action with the incorporation of the GPS feature into the application, it would reduce the erroneous detections to the minimum and upgrade the overall outcome. Of course, offering the potential for learning crucial information about each monument with a build-in function is an action that can only be beneficial.        
+
+
+## Conclusions
+In this project, we have provided an approach to constructing and implementing a Monument/Landmark object detection model based on Convolution Neural Networks. Gathering a sufficient number of images for the UNESCO World Heritage Monuments of Thessaloniki and using the SSD MobileNet V1 and V2 models, we were able to successfully train and apply them in an Android application, capable of conducting a real-time object detection. Utilizing the Transfer Learning technique, both models are able to identify and localize the desired objects with satisfactory accuracy, achieving at the same time high mAP performance. The application operates properly performing predictions consisted of a bounding box that encloses the detected object in combination with a score that describes the confidence of the model. Considering that the models provide accurate results in a short time of period, it strengthens the fact that real-time object detection can be also applied on mobile devices, even with limited computational power. The results presented in chapter 5 confirm the high performance for the investigating models, proving synchronously a superiority of the SSD MobileNet V2 over the SSD MobileNet V1. Moreover, as reasonably proven different monument exhibit different results, with some of them being easier and some other more challenging to identify. The data augmentation technique implemented on the V2 model managed to present a slight increase in the overall accuracy of the model.
 
 
 
