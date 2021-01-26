@@ -13,9 +13,17 @@ In this project, we provided an approach to constructing and implementing a Monu
     * [3. Setting up the environment](#3-setting-up-the-environment)
     * [4. Converting xml files to tfrecord](#4-converting-xml-files-to-tfrecord)
     * [5. Creating a label map](#5-creating-a-label-map)
-
-
-
+    * [6. Download a pre-trained model and alter the configuration file](#6-download-a-pre-trained-model-and-alter-the-configuration-file)
+    * [7. Training the model](#7-training-the-model)
+    * [8. Measuring and evaluating the model with Tensorboard](#8-measuring-and-evaluating-the-model-with-Tensorboard)
+    * [9. Exporting the graph from the trained model](#9-exporting-the-graph-from-the-trained-model)
+    * [10. Getting the model’s lite version with TFLite](#10-getting-the-model’s-lite-version-with-TFLite)
+    * [11. Adding a metadata file to the transformed model](#11-adding-a-metadata-file-to-the-transformed-model)
+    * [12. Deploying the model to Android](#12-deploying-the-model-to-android)
+* [Results](#results)
+* [Applying Data Augmentation](#applying-data-augmentation)
+* [Future Work](#future-work)
+* [Conclusions](#conclusions)
 
 
 ## Approach
