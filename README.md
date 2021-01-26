@@ -5,6 +5,17 @@ In this project, we provided an approach to constructing and implementing a Monu
 
 
 ## Table of Contents 
+* [Approach](#approach)
+    * [1. Preparing the dataset](#1-preparing-the-dataset)
+        * [A. Data Gathering](#a-data-gathering)
+        * [B. Data pre-processing](#B-data-pre-processing)
+    * [2. Google Colaboratory](#2-google-colaboratory)
+    * [3. Setting up the environment](#3-setting-up-the-environment)
+    * [4. Converting xml files to tfrecord](#4-converting-xml-files-to-tfrecord)
+    * [5. Creating a label map](#5-creating-a-label-map)
+
+
+
 
 
 ## Approach
