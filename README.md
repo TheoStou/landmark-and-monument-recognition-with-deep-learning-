@@ -362,7 +362,7 @@ Example of the user’s application environment. The picture displays a correct 
 **mAP performance for SSD MobileNet V1**
 | **Step** | **mAP** | **mAP_0.50_IoU** | **AP_0.75_IoU** |
 | :--- | :--- | :--- | :--- |
-| **1.622** | 1.189E-02% | 9.358E-02% | 3.67E-06% |
+| **1622** | 1.189E-02% | 9.358E-02% | 3.67E-06% |
 | **24872** | 53.88% | 85.68%| 59.53% |
 | **68146** | 64.51% | 92.31% | 76.48% |
 | **89725** | 67.36% | 93.35% | 78.30% |
@@ -397,8 +397,28 @@ Table of the evaluation results for SSD MobileNet V1 model. </br> </br>
 Table of the evaluation results for SSD MobileNet V2 model. </br> </br>
 
 
+## Applying Data Augmentation
+A common method utilized especially in deep learning to enhance the results for specific tasks is that of Data Augmentation. This approach enables the production of new artificially training data based on the already existed training data. Various data augmentation techniques can be implemented for images just like position augmentation (scaling, cropping, padding, etc.) and color augmentation (brightness, saturation, etc.) offering a greater diversity to the dataset. </br> </br>
 
+As object detection is the investigated subject in our case study, data augmentation should also be applied for the generated bounding boxed of the original dataset. To achieve this task, initially, all the generated (XML) files are converted into (CSV). Sequentially, the augmentation parameters are structured selecting randomly one augmenter for each instance. Furthermore, the transformation of the bounding boxes into a (data frame) format constitutes an essential part, before eventually completing the process by generating the new transformed images along with the new (CSV) file that contains the total amount of the labels (original images + augmented images). </br> </br>
 
+For the purpose of this experiment scale, translate, multiplication, Gaussian Blur, Gaussian Noise, and Linear Contrast were utilized to generate the new training data. (Figure 48) demonstrates an example of the data augmentation that was applied to produce two additional images from an existing image. In addition, a total of 7550 new images were produced to supply the training process, which was conducted based on the SSD MobileNet V2 model, which was the one that presented overall the best outcomes. </br> </br>
+
+NOTE: The code that utilized to implement data augmentation is provided in the **Data_Augmentation.py** file. </br> </br>
+
+![Example of the data augmentation](https://user-images.githubusercontent.com/74372152/105869545-0419d380-6000-11eb-964b-d864099b9a94.png) </br>
+Example of the data augmentation technique applied. The church of Panayia Chalkeon is depicted on the three above cases. (a) It is the original image. (b) It is a newly produced image with Linear Contrast. (c) It is another newly produced image with Gaussian Blur. </br> </br>
+
+**mAP performance for SSD MobileNet V2 with augmented data**
+| **Step** | **mAP** | **mAP_0.50_IoU** | **AP_0.75_IoU** |
+| :--- | :--- | :--- | :--- |
+| **1416** | 1.374E-01% | 5.376E-01% | 1.77E-03% |
+| **33378** | 61.49% | 91.23% | 69.48% |
+| **65672** | 65.59% | 93.65% | 75.10% |
+| **103870** | 69.37% | 94.93% | 79.60% |
+| **140507** | 71.68% | 96.14% | 83.31% |
+| **182708** | 71.14% | 95.56% | 82.41% |
+| **196640** | **73.19%** | **96.37%** | **83.37%** |
 
 
 
