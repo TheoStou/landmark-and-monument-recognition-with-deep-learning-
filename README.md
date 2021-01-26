@@ -333,7 +333,7 @@ In this step, the “export_tflite_ssd_graph.py” script is used to generate a 
 ```
 
 
-### 10. Getting the model's lite version with TFLite
+### 10. Getting the model s lite version with TFLite
 In order to deploy our model in the Android platform, it is necessary first to convert the created “tflite_graph.pb” file into a Tensorflow Lite format. Using a special format for manipulating models, Tensorflow Lite offers efficient execution for mobile and other embedded devices, utilizing limited computational power. To perform the conversion, the [Tensorflow Lite converter tool](https://www.tensorflow.org/lite/guide/get_started) was used. There are two options for conversion, either to generate a Non-quantized model or a quantized one. The former of the two presents slightly better results and requires more storing space, although the latter of the two provides slightly worst results requiring fewer storing space. After the correct execution, a (TFLITE) file is created. </br> </br>
 **Converting the model to Tensorflow Lite format, using the non-quantized method.**
 ```ruby
